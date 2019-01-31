@@ -1,10 +1,13 @@
 package com.yonipony.app.ui.model.request;
 
+import java.util.List;
+
 public class UserModel {
 	private String firstName;
 	private String lastName;
 	private String email;
 	private String password;
+	private List<AddressModel> addresses;
 
 	
 	public String getFirstName() {
@@ -37,6 +40,14 @@ public class UserModel {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public List<AddressModel> getAddresses() {
+		return addresses;
+	}
+
+	public void setAddresses(List<AddressModel> addresses) {
+		this.addresses = addresses;
 	}
 
 }
