@@ -11,9 +11,6 @@ import javax.persistence.ManyToOne;
 
 @Entity(name = "addresses")
 public class AddressEntity implements Serializable {
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -45762441235397873L;
 
 	@Id
