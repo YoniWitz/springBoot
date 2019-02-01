@@ -11,32 +11,32 @@ import javax.persistence.ManyToOne;
 
 @Entity(name = "addresses")
 public class AddressEntity implements Serializable {
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -45762441235397873L;
 
 	@Id
 	@GeneratedValue
 	private long id;
 
-	@Column(nullable = false)
+	@Column(length = 30, nullable = false)
+	private String addressId;
+
+	@Column(length = 15, nullable = false)
 	private String city;
 
-	@Column(nullable = false)
+	@Column(length = 15, nullable = false)
 	private String country;
 
-	@Column(nullable = false)
+	@Column(length = 100, nullable = false)
 	private String streetName;
 
-	@Column(nullable = false)
+	@Column(length = 7, nullable = false)
 	private String postalCode;
 
-	@Column(nullable = false)
+	@Column(length = 10, nullable = false)
 	private String type;
 
 	@ManyToOne
-	@JoinColumn(name = "userId")
+	@JoinColumn(name = "users_id")
 	private UserEntity user;
 
 	public long getId() {
@@ -93,6 +93,14 @@ public class AddressEntity implements Serializable {
 
 	public void setUser(UserEntity user) {
 		this.user = user;
+	}
+
+	public String getAddressId() {
+		return addressId;
+	}
+
+	public void setAddressId(String addressId) {
+		this.addressId = addressId;
 	}
 
 }

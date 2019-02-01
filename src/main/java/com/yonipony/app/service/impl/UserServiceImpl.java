@@ -3,7 +3,7 @@ package com.yonipony.app.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.beans.BeanUtils;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -18,11 +18,13 @@ import com.yonipony.app.io.entity.UserEntity;
 import com.yonipony.app.io.repository.UserRepository;
 import com.yonipony.app.service.UserService;
 import com.yonipony.app.shared.Utils;
+import com.yonipony.app.shared.dto.AddressDto;
 import com.yonipony.app.shared.dto.UserDto;
 import com.yonipony.app.ui.model.response.ErrorMessages;
 
 @Service
 public class UserServiceImpl implements UserService {
+	static ModelMapper modelMapper = new ModelMapper();
 
 	@Autowired
 	UserRepository userRepository;
@@ -37,19 +39,21 @@ public class UserServiceImpl implements UserService {
 
 		if (userRepository.findByEmail(user.getEmail()) != null)
 			throw new RuntimeException("user with email already exists");
+		AddressDto address = new AddressDto();
+		for (int i = 0; i < user.getAddresses().size(); i++) {
+			address = user.getAddresses().get(i);
+			address.setAddressId(utils.generateAddressId(30));
+			address.setUser(user);
+		}
 
-		UserEntity userEntity = new UserEntity();
-		BeanUtils.copyProperties(user, userEntity);
+		UserEntity userEntity = modelMapper.map(user, UserEntity.class);
 
 		userEntity.setEncryptedPassword(bCryptPasswordEncoder.encode(user.getPassword()));
 		userEntity.setUserId(utils.generateUserId(30));
 
 		UserEntity storedUser = userRepository.save(userEntity);
 
-		UserDto returnedUser = new UserDto();
-		BeanUtils.copyProperties(storedUser, returnedUser);
-
-		return returnedUser;
+		return modelMapper.map(storedUser, UserDto.class);
 	}
 
 	@Override
@@ -68,10 +72,7 @@ public class UserServiceImpl implements UserService {
 		if (userEntity == null)
 			throw new UserServiceException(ErrorMessages.NO_RECORD_FOUND.getErrorMessage());
 
-		UserDto returnValue = new UserDto();
-		BeanUtils.copyProperties(userEntity, returnValue);
-
-		return returnValue;
+		return modelMapper.map(userEntity, UserDto.class);
 	}
 
 	@Override
@@ -79,16 +80,14 @@ public class UserServiceImpl implements UserService {
 		Pageable pageable = PageRequest.of(page, limit);
 		Page<UserEntity> usersEntityPage = userRepository.findAll(pageable);
 		List<UserEntity> usersEntity = usersEntityPage.getContent();
-		
+
 		if (usersEntity == null)
 			throw new UserServiceException(ErrorMessages.NO_RECORD_FOUND.getErrorMessage());
 
 		List<UserDto> returnValue = new ArrayList<>();
-		UserDto userDto = new UserDto();
-		
+
 		for (UserEntity userEntity : usersEntity) {
-			BeanUtils.copyProperties(userEntity, userDto);
-			returnValue.add(userDto);
+			returnValue.add(modelMapper.map(userEntity, UserDto.class));
 		}
 
 		return returnValue;
@@ -101,10 +100,7 @@ public class UserServiceImpl implements UserService {
 		if (userEntity == null)
 			throw new UserServiceException(ErrorMessages.NO_RECORD_FOUND.getErrorMessage());
 
-		UserDto returnValue = new UserDto();
-		BeanUtils.copyProperties(userEntity, returnValue);
-
-		return returnValue;
+		return modelMapper.map(userEntity, UserDto.class);
 	}
 
 	@Override
@@ -118,10 +114,8 @@ public class UserServiceImpl implements UserService {
 		userEntity.setLastName(user.getLastName());
 
 		UserEntity updatedUser = userRepository.save(userEntity);
-		UserDto returnedUser = new UserDto();
-		BeanUtils.copyProperties(updatedUser, returnedUser);
 
-		return returnedUser;
+		return modelMapper.map(updatedUser, UserDto.class);
 	}
 
 	@Override

@@ -1,24 +1,19 @@
-package com.yonipony.app.shared.dto;
+package com.yonipony.app.ui.model.response;
 
-import java.io.Serializable;
-
-public class AddressDto implements Serializable {
-	private static final long serialVersionUID = 4934214225561608833L;
-	private long id;
+public class AddressRest {
 	private String addressId;
 	private String city;
 	private String country;
 	private String streetName;
 	private String postalCode;
 	private String type;
-	private UserDto user;
 
-	public long getId() {
-		return id;
+	public String getAddressId() {
+		return addressId;
 	}
 
-	public void setId(long id) {
-		this.id = id;
+	public void setAddressId(String addressId) {
+		this.addressId = addressId;
 	}
 
 	public String getCity() {
@@ -59,22 +54,6 @@ public class AddressDto implements Serializable {
 
 	public void setType(String type) {
 		this.type = type;
-	}
-
-	public UserDto getUser() {
-		return user;
-	}
-
-	public void setUser(UserDto user) {
-		this.user = user;
-	}
-
-	public String getAddressId() {
-		return addressId;
-	}
-
-	public void setAddressId(String addressId) {
-		this.addressId = addressId;
 	}
 
 }
