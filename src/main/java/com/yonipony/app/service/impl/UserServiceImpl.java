@@ -35,25 +35,25 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	BCryptPasswordEncoder bCryptPasswordEncoder;
 
-	public UserDto createUser(UserDto user) {
-
-		if (userRepository.findByEmail(user.getEmail()) != null)
+	public UserDto createUser(UserDto userDto) {
+		if (userRepository.findByEmail(userDto.getEmail()) != null)
 			throw new RuntimeException("user with email already exists");
-		AddressDto address = new AddressDto();
-		for (int i = 0; i < user.getAddresses().size(); i++) {
-			address = user.getAddresses().get(i);
-			address.setAddressId(utils.generateAddressId(30));
-			address.setUser(user);
+		AddressDto addressDto = new AddressDto();
+		for (int i = 0; i < userDto.getAddresses().size(); i++) {
+			addressDto = userDto.getAddresses().get(i);
+			addressDto.setAddressId(utils.generateAddressId(30));
+			addressDto.setUser(userDto);
 		}
 
-		UserEntity userEntity = modelMapper.map(user, UserEntity.class);
+		UserEntity userEntity = modelMapper.map(userDto, UserEntity.class);
 
-		userEntity.setEncryptedPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+		userEntity.setEncryptedPassword(bCryptPasswordEncoder.encode(userDto.getPassword()));
 		userEntity.setUserId(utils.generateUserId(30));
 
-		UserEntity storedUser = userRepository.save(userEntity);
+		UserEntity storedUserEntity = userRepository.save(userEntity);
 
-		return modelMapper.map(storedUser, UserDto.class);
+		UserDto returnUserDto = modelMapper.map(storedUserEntity, UserDto.class);
+		return returnUserDto;
 	}
 
 	@Override
@@ -72,7 +72,8 @@ public class UserServiceImpl implements UserService {
 		if (userEntity == null)
 			throw new UserServiceException(ErrorMessages.NO_RECORD_FOUND.getErrorMessage());
 
-		return modelMapper.map(userEntity, UserDto.class);
+		UserDto returnUserDto = modelMapper.map(userEntity, UserDto.class);
+		return returnUserDto;
 	}
 
 	@Override
@@ -84,13 +85,13 @@ public class UserServiceImpl implements UserService {
 		if (usersEntity == null)
 			throw new UserServiceException(ErrorMessages.NO_RECORD_FOUND.getErrorMessage());
 
-		List<UserDto> returnValue = new ArrayList<>();
+		List<UserDto> returnUsersDto = new ArrayList<>();
 
 		for (UserEntity userEntity : usersEntity) {
-			returnValue.add(modelMapper.map(userEntity, UserDto.class));
+			returnUsersDto.add(modelMapper.map(userEntity, UserDto.class));
 		}
 
-		return returnValue;
+		return returnUsersDto;
 	}
 
 	@Override
@@ -100,7 +101,8 @@ public class UserServiceImpl implements UserService {
 		if (userEntity == null)
 			throw new UserServiceException(ErrorMessages.NO_RECORD_FOUND.getErrorMessage());
 
-		return modelMapper.map(userEntity, UserDto.class);
+		UserDto returnUserDto = modelMapper.map(userEntity, UserDto.class);
+		return returnUserDto;
 	}
 
 	@Override
@@ -113,9 +115,10 @@ public class UserServiceImpl implements UserService {
 		userEntity.setFirstName(user.getFirstName());
 		userEntity.setLastName(user.getLastName());
 
-		UserEntity updatedUser = userRepository.save(userEntity);
+		UserEntity updatedUserEntity = userRepository.save(userEntity);
 
-		return modelMapper.map(updatedUser, UserDto.class);
+		UserDto returnUpdatedUserDto = modelMapper.map(updatedUserEntity, UserDto.class);
+		return returnUpdatedUserDto;
 	}
 
 	@Override
