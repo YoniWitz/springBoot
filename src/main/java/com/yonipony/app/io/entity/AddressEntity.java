@@ -103,4 +103,10 @@ public class AddressEntity implements Serializable {
 		this.addressId = addressId;
 	}
 
+	@Override
+	public String toString() {
+		return String.format("Address [addressId=%s, city=%s, country=%s, streetName=%s, postalCode=%s, type=%s]",
+				addressId, city, country, streetName, postalCode, type);
+	}
+
 }

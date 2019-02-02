@@ -47,4 +47,16 @@ public class AddressModel {
 		this.type = type;
 	}
 
+	public AddressModel() {
+	}
+
+	public AddressModel(String city, String country, String streetName, String postalCode, String type) {
+		super();
+		this.city = city;
+		this.country = country;
+		this.streetName = streetName;
+		this.postalCode = postalCode;
+		this.type = type;
+	}
+
 }
