@@ -77,4 +77,25 @@ public class AddressDto implements Serializable {
 		this.addressId = addressId;
 	}
 
+	@Override
+	public String toString() {
+		return String.format(
+				"Address [addressId=%s, city=%s, country=%s, streetName=%s, postalCode=%s, type=%s]",
+				addressId, city, country, streetName, postalCode, type);
+	}
+
+	public AddressDto() {
+	}
+
+	public AddressDto(String addressId, String city, String country, String streetName, String postalCode,
+			String type) {
+		super();
+		this.addressId = addressId;
+		this.city = city;
+		this.country = country;
+		this.streetName = streetName;
+		this.postalCode = postalCode;
+		this.type = type;
+	}
+
 }

@@ -38,11 +38,14 @@ public class UserServiceImpl implements UserService {
 	public UserDto createUser(UserDto userDto) {
 		if (userRepository.findByEmail(userDto.getEmail()) != null)
 			throw new RuntimeException("user with email already exists");
-		AddressDto addressDto = new AddressDto();
-		for (int i = 0; i < userDto.getAddresses().size(); i++) {
-			addressDto = userDto.getAddresses().get(i);
-			addressDto.setAddressId(utils.generateAddressId(30));
-			addressDto.setUser(userDto);
+
+		if (userDto.getAddresses() != null) {
+			AddressDto addressDto = new AddressDto();
+			for (int i = 0; i < userDto.getAddresses().size(); i++) {
+				addressDto = userDto.getAddresses().get(i);
+				addressDto.setAddressId(utils.generateAddressId(30));
+				addressDto.setUser(userDto);
+			}
 		}
 
 		UserEntity userEntity = modelMapper.map(userDto, UserEntity.class);
