@@ -15,7 +15,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import com.yonipony.app.service.UserService;
 import com.yonipony.app.service.impl.UserServiceImpl;
 import com.yonipony.app.shared.dto.AddressDto;
 import com.yonipony.app.shared.dto.UserDto;
@@ -39,7 +38,9 @@ class UserControllerTest {
 		MockitoAnnotations.initMocks(this);
 		addressDto = new AddressDto("addressId1", "jerusalem", "Israel", "hanagid", "94725", "myType");
 		addressDto2 = new AddressDto("addressId2", "ClintonHill", "USA", "Classon", "11205", "billing");
-		addressesDto = new ArrayList<AddressDto>(){{add(addressDto); add(addressDto2);}};
+		addressesDto = new ArrayList<>();
+		addressesDto.add(addressDto); 
+		addressesDto.add(addressDto2);
 		
 		userDto = new UserDto("yoni", "pony", "test@test", "lkajdsf", addressesDto);
 	}
