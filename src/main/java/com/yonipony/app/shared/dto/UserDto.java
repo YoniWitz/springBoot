@@ -96,6 +96,9 @@ public class UserDto implements Serializable {
 		this.addresses = addresses;
 	}
 
+	public UserDto() {
+	}
+
 	public UserDto(String firstName, String lastName, String email, String password, List<AddressDto> addresses) {
 		super();
 		this.firstName = firstName;
