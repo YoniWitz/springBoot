@@ -7,6 +7,7 @@ import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -32,6 +33,7 @@ import com.yonipony.app.ui.model.response.UserRest;
 
 @RestController
 @RequestMapping("users") // http://localhost:8080/users
+@CrossOrigin(origins = {"http://localhost:8080", "http://localhost:8040"})
 public class UserController {
 	static ModelMapper modelMapper = new ModelMapper();
 
@@ -51,6 +53,7 @@ public class UserController {
 
 	@GetMapping(path = "/{userId}/addresses", produces = { MediaType.APPLICATION_JSON_VALUE,
 			MediaType.APPLICATION_XML_VALUE })
+	@CrossOrigin(origins = "*")
 	public List<AddressRest> getUserAddresses(@PathVariable String userId) {
 		List<AddressDto> addressesDto = addressService.getAddressesByUserId(userId);
 
