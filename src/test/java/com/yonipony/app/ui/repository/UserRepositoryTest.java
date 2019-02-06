@@ -109,7 +109,7 @@ class UserRepositoryTest {
 	}
 	
 	@Test
-	void testupdateFirstName() {
+	void testUpdateFirstName() {
 		String firstName = "fuckyou";
 		String lastName = "Kargopolov";
 
@@ -119,5 +119,15 @@ class UserRepositoryTest {
 		assertNotNull(usersEntity);
 		assertEquals(usersEntity.size(), 3);
 		assertTrue(usersEntity.get(0).getFirstName().equals(firstName));
+	}
+	
+	@Test
+	void testFindByEmail() {
+		String email = "popo123456";
+
+		UserEntity userEntity = userRepository.findUserByEmail(email);
+
+		assertNotNull(userEntity);
+		assertTrue(userEntity.getEmail().equals(email));
 	}
 }
