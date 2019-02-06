@@ -39,4 +39,7 @@ public interface UserRepository extends PagingAndSortingRepository<UserEntity, L
 	@Modifying
 	@Query(value = "update Users U set u.first_name=:firstName where u.last_name=:lastName", nativeQuery = true)
 	void updateFirstName(@Param("firstName") String firstName, @Param("lastName") String lastName);
+
+	@Query("select user from users user where user.email = :email")
+	UserEntity findUserByEmail(@Param("email") String email);
 }
