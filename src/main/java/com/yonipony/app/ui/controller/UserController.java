@@ -31,9 +31,13 @@ import com.yonipony.app.ui.model.response.OperationStatus;
 import com.yonipony.app.ui.model.response.OperationStatuses;
 import com.yonipony.app.ui.model.response.UserRest;
 
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
+
 @RestController
 @RequestMapping("users") // http://localhost:8080/users
-@CrossOrigin(origins = {"http://localhost:8080", "http://localhost:8040"})
+@CrossOrigin(origins = { "http://localhost:8080", "http://localhost:8040" })
 public class UserController {
 	static ModelMapper modelMapper = new ModelMapper();
 
@@ -43,6 +47,8 @@ public class UserController {
 	@Autowired
 	AddressService addressService;
 
+	@ApiOperation(value = "${userController.Swagger.GetUser.value}", notes = "${userController.Swagger.GetUser.notes}")
+	@ApiImplicitParams({ @ApiImplicitParam(name = "authorization", value = "bearer JWT token", paramType = "header") })
 	@GetMapping(path = "/{userId}", produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
 	public UserRest getUser(@PathVariable String userId) {
 		UserDto userDto = userService.getUserByUserId(userId);
@@ -51,6 +57,8 @@ public class UserController {
 		return returnUser;
 	}
 
+	@ApiOperation(value = "${userController.Swagger.GetUserAddresses.value}", notes = "${userController.Swagger.GetUserAddresses.notes}")
+	@ApiImplicitParams({ @ApiImplicitParam(name = "authorization", value = "bearer JWT token", paramType = "header") })
 	@GetMapping(path = "/{userId}/addresses", produces = { MediaType.APPLICATION_JSON_VALUE,
 			MediaType.APPLICATION_XML_VALUE })
 	@CrossOrigin(origins = "*")
@@ -64,6 +72,8 @@ public class UserController {
 		return returnAddresses;
 	}
 
+	@ApiOperation(value = "${userController.Swagger.GetUserAddress.value}", notes = "${userController.Swagger.GetUserAddress.notes}")
+	@ApiImplicitParams({ @ApiImplicitParam(name = "authorization", value = "bearer JWT token", paramType = "header") })
 	@GetMapping(path = "/{userId}/addresses/{addressId}", produces = { MediaType.APPLICATION_JSON_VALUE,
 			MediaType.APPLICATION_XML_VALUE })
 	public AddressRest getUserAddress(@PathVariable String addressId) {
@@ -74,6 +84,8 @@ public class UserController {
 		return returnAddress;
 	}
 
+	@ApiOperation(value = "${userController.Swagger.GetUsers.value}", notes = "${userController.Swagger.GetUsers.notes}")
+	@ApiImplicitParams({ @ApiImplicitParam(name = "authorization", value = "bearer JWT token", paramType = "header") })
 	@GetMapping(produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
 	public List<UserRest> getUsers(@RequestParam(value = "page", defaultValue = "1") int page,
 			@RequestParam(value = "limit", defaultValue = "50") int limit) {
@@ -88,6 +100,7 @@ public class UserController {
 		return returnUsers;
 	}
 
+	@ApiOperation(value = "${userController.Swagger.CreateUser.value}", notes = "${userController.Swagger.CreateUser.notes}")
 	@PostMapping(produces = { MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE }, consumes = {
 			MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE })
 	public UserRest createUser(@RequestBody UserModel userModel) {
@@ -106,6 +119,8 @@ public class UserController {
 		return returnCreatedUser;
 	}
 
+	@ApiOperation(value = "${userController.Swagger.UpdateUser.value}", notes = "${userController.Swagger.UpdateUser.notes}")
+	@ApiImplicitParams({ @ApiImplicitParam(name = "authorization", value = "bearer JWT token", paramType = "header") })
 	@PutMapping(path = "/{userId}", produces = { MediaType.APPLICATION_JSON_VALUE,
 			MediaType.APPLICATION_XML_VALUE }, consumes = { MediaType.APPLICATION_XML_VALUE,
 					MediaType.APPLICATION_JSON_VALUE })
@@ -118,6 +133,8 @@ public class UserController {
 		return returnUpdatedUser;
 	}
 
+	@ApiOperation(value = "${userController.Swagger.DeleteUser.value}", notes = "${userController.Swagger.DeleteUser.notes}")
+	@ApiImplicitParams({ @ApiImplicitParam(name = "authorization", value = "bearer JWT token", paramType = "header") })
 	@DeleteMapping(path = "/{userId}", produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
 	public OperationStatus deleteUser(@PathVariable String userId) {
 		OperationStatus returnStatus = new OperationStatus(OperationNames.DELETE.name());
