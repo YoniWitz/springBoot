@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.yonipony.app.ui.model.request.LoginRequestModel;
+import com.yonipony.app.ui.model.request.UserLoginRequestModel;
 
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -26,7 +26,7 @@ public class LoginController {
 	@PostMapping(path = "/login", produces = { MediaType.APPLICATION_JSON_VALUE,
 			MediaType.APPLICATION_XML_VALUE }, consumes = { MediaType.APPLICATION_XML_VALUE,
 					MediaType.APPLICATION_JSON_VALUE })
-	public void fakeLogin(@RequestBody LoginRequestModel loginRequestModel) {
+	public void fakeLogin(@RequestBody UserLoginRequestModel userLoginRequestModel) {
 		throw new IllegalStateException(
 				"This method should not be called. The method is implemented by Spring Security");
 	}

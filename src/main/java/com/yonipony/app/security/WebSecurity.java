@@ -33,9 +33,9 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
 				.antMatchers(HttpMethod.POST, SecurityConstants.SIGN_UP_URL).permitAll()
 				.antMatchers(SecurityConstants.H2_CONSOLE).permitAll()
 				.antMatchers("/v2/api-docs", "/configuration/**", "/swagger*/**", "/webjars/**").permitAll()
-				.anyRequest().authenticated().and().addFilter(new AuthenticationFilter(authenticationManager()))
-				.addFilter(new AuthorizationFilter(authenticationManager())).sessionManagement()
-				.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+				.anyRequest().authenticated().and().addFilter(getAuthenticationFilter())
+				.addFilter(new AuthorizationFilter(authenticationManager()))
+				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
 		http.headers().frameOptions().disable();
 	}
@@ -44,11 +44,11 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
 	public void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.userDetailsService(userService).passwordEncoder(bCryptPasswordEncoder);
 	}
-	
+
 	protected AuthenticationFilter getAuthenticationFilter() throws Exception {
-	    final AuthenticationFilter filter = new AuthenticationFilter(authenticationManager());
-	    filter.setFilterProcessesUrl("/users/login");
-	    return filter;
+		final AuthenticationFilter filter = new AuthenticationFilter(authenticationManager());
+		filter.setFilterProcessesUrl("/users/login");
+		return filter;
 	}
 
 	@Bean
