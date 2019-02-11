@@ -6,6 +6,9 @@ import java.util.List;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.Link;
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -36,7 +39,7 @@ import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 
 @RestController
-@RequestMapping("users") // http://localhost:8080/users
+@RequestMapping("/users") // http://localhost:8080/users
 @CrossOrigin(origins = { "http://localhost:8080", "http://localhost:8040" })
 public class UserController {
 	static ModelMapper modelMapper = new ModelMapper();
@@ -60,15 +63,24 @@ public class UserController {
 	@ApiOperation(value = "${userController.Swagger.GetUserAddresses.value}", notes = "${userController.Swagger.GetUserAddresses.notes}")
 	@ApiImplicitParams({ @ApiImplicitParam(name = "authorization", value = "bearer JWT token", paramType = "header") })
 	@GetMapping(path = "/{userId}/addresses", produces = { MediaType.APPLICATION_JSON_VALUE,
-			MediaType.APPLICATION_XML_VALUE })
+			MediaType.APPLICATION_XML_VALUE, "application/hal+json" })
 	@CrossOrigin(origins = "*")
 	public List<AddressRest> getUserAddresses(@PathVariable String userId) {
 		List<AddressDto> addressesDto = addressService.getAddressesByUserId(userId);
 
-		java.lang.reflect.Type listType = new TypeToken<List<AddressRest>>() {
+		java.lang.reflect.Type listType = new TypeToken<List<AddressRest>>() { // necessary cause it's a list
 		}.getType();
 
 		List<AddressRest> returnAddresses = modelMapper.map(addressesDto, listType);
+
+		for (AddressRest addressRest : returnAddresses) {			
+			Link addressLink = linkTo(methodOn(UserController.class).getUserAddress(addressRest.getAddressId(), userId)).withSelfRel();
+			Link userLink = linkTo(methodOn(UserController.class).getUser(userId)).withRel("user");
+			
+			addressRest.add(addressLink);
+			addressRest.add(userLink);
+			
+		}
 		return returnAddresses;
 	}
 
@@ -76,10 +88,16 @@ public class UserController {
 	@ApiImplicitParams({ @ApiImplicitParam(name = "authorization", value = "bearer JWT token", paramType = "header") })
 	@GetMapping(path = "/{userId}/addresses/{addressId}", produces = { MediaType.APPLICATION_JSON_VALUE,
 			MediaType.APPLICATION_XML_VALUE })
-	public AddressRest getUserAddress(@PathVariable String addressId) {
+	public AddressRest getUserAddress(@PathVariable String addressId, @PathVariable String userId) {
 		AddressDto addressDto = addressService.getAddress(addressId);
 
+		Link addressLink = linkTo(methodOn(UserController.class).getUserAddress(addressId, userId)).withSelfRel();
+		Link allAddressesLink = linkTo(methodOn(UserController.class).getUserAddresses(userId)).withRel("all adresses");
+		Link userLink = linkTo(methodOn(UserController.class).getUser(userId)).withRel("user");
 		AddressRest returnAddress = modelMapper.map(addressDto, AddressRest.class);
+		returnAddress.add(addressLink);
+		returnAddress.add(allAddressesLink);
+		returnAddress.add(userLink);
 
 		return returnAddress;
 	}
