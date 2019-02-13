@@ -73,13 +73,14 @@ public class UserController {
 
 		List<AddressRest> returnAddresses = modelMapper.map(addressesDto, listType);
 
-		for (AddressRest addressRest : returnAddresses) {			
-			Link addressLink = linkTo(methodOn(UserController.class).getUserAddress(addressRest.getAddressId(), userId)).withSelfRel();
+		for (AddressRest addressRest : returnAddresses) {
+			Link addressLink = linkTo(methodOn(UserController.class).getUserAddress(addressRest.getAddressId(), userId))
+					.withSelfRel();
 			Link userLink = linkTo(methodOn(UserController.class).getUser(userId)).withRel("user");
-			
+
 			addressRest.add(addressLink);
 			addressRest.add(userLink);
-			
+
 		}
 		return returnAddresses;
 	}
@@ -161,5 +162,19 @@ public class UserController {
 		returnStatus.setOperationStatus(OperationStatuses.SUCCESS.name());
 
 		return returnStatus;
+	}
+
+	@GetMapping(path = "/email-verification", produces = { MediaType.APPLICATION_JSON_VALUE,
+			MediaType.APPLICATION_XML_VALUE })
+	public OperationStatus verifyEmailToken(@RequestParam(value = "token") String token) {
+		OperationStatus returnValue = new OperationStatus();
+		returnValue.setOperationName(OperationNames.VERIFY_EMAIL.name());
+
+		boolean isVerified = userService.verifyEmailToken(token);
+		if (isVerified)
+			returnValue.setOperationStatus(OperationStatuses.SUCCESS.name());
+		else
+			returnValue.setOperationStatus(OperationStatuses.ERROR.name());
+		return returnValue;
 	}
 }

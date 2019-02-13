@@ -19,6 +19,7 @@ import com.yonipony.app.exceptions.UserServiceException;
 import com.yonipony.app.io.entity.UserEntity;
 import com.yonipony.app.io.repository.UserRepository;
 import com.yonipony.app.service.UserService;
+import com.yonipony.app.shared.AmazonSES;
 import com.yonipony.app.shared.Utils;
 import com.yonipony.app.shared.dto.AddressDto;
 import com.yonipony.app.shared.dto.UserDto;
@@ -53,11 +54,17 @@ public class UserServiceImpl implements UserService {
 		UserEntity userEntity = modelMapper.map(userDto, UserEntity.class);
 
 		userEntity.setEncryptedPassword(bCryptPasswordEncoder.encode(userDto.getPassword()));
-		userEntity.setUserId(utils.generateUserId(30));
+		String publicUserId = utils.generateUserId(30);
+		userEntity.setUserId(publicUserId);
+		userEntity.setEmailVerificationToken(utils.generateEmailVerificationToken(publicUserId));
 
 		UserEntity storedUserEntity = userRepository.save(userEntity);
 
 		UserDto returnUserDto = modelMapper.map(storedUserEntity, UserDto.class);
+		
+		//send email message to user to verify their email address
+		new AmazonSES().verifyEmail(returnUserDto);
+		
 		return returnUserDto;
 	}
 
@@ -67,7 +74,8 @@ public class UserServiceImpl implements UserService {
 		if (userEntity == null)
 			throw new UsernameNotFoundException(email);
 
-		return new User(userEntity.getEmail(), userEntity.getEncryptedPassword(), new ArrayList<>());
+		return new User(userEntity.getEmail(), userEntity.getEncryptedPassword(),
+				userEntity.isEmailVerificationStatus(), true, true, true, new ArrayList<>());
 	}
 
 	@Override
@@ -79,7 +87,7 @@ public class UserServiceImpl implements UserService {
 
 		UserDto returnValue = new UserDto();
 		BeanUtils.copyProperties(userEntity, returnValue);
- 
+
 		return returnValue;
 	}
 
@@ -136,5 +144,21 @@ public class UserServiceImpl implements UserService {
 			throw new UserServiceException(ErrorMessages.NO_RECORD_FOUND.getErrorMessage());
 
 		userRepository.delete(userEntity);
+	}
+
+	@Override
+	public boolean verifyEmailToken(String token) {
+		boolean returnValue = false;
+		UserEntity userEntity = userRepository.findByEmailVerificationToken(token);
+		if (userEntity != null) {
+			boolean hasTokenExpired = Utils.hasTokenExpired(token);
+			if (!hasTokenExpired) {
+				userEntity.setEmailVerificationToken(null);
+				userEntity.setEmailVerificationStatus(Boolean.TRUE);
+				userRepository.save(userEntity);
+				returnValue = true;
+			}
+		}
+		return returnValue;
 	}
 }
