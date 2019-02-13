@@ -18,4 +18,6 @@ public interface UserService extends UserDetailsService {
 	UserDto updateUser(UserDto user, String userId);
 
 	void deleteUserByUserId(String userId);
+	
+	boolean verifyEmailToken(String token);
 }
