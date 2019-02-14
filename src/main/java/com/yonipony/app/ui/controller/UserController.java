@@ -26,6 +26,8 @@ import com.yonipony.app.service.AddressService;
 import com.yonipony.app.service.UserService;
 import com.yonipony.app.shared.dto.AddressDto;
 import com.yonipony.app.shared.dto.UserDto;
+import com.yonipony.app.ui.model.request.PasswordResetModel;
+import com.yonipony.app.ui.model.request.PasswordResetRequestModel;
 import com.yonipony.app.ui.model.request.UserModel;
 import com.yonipony.app.ui.model.response.AddressRest;
 import com.yonipony.app.ui.model.response.ErrorMessages;
@@ -175,6 +177,38 @@ public class UserController {
 			returnValue.setOperationStatus(OperationStatuses.SUCCESS.name());
 		else
 			returnValue.setOperationStatus(OperationStatuses.ERROR.name());
+		return returnValue;
+	}
+
+	@PostMapping(path = "/password-reset-request", produces = { MediaType.APPLICATION_JSON_VALUE,
+			MediaType.APPLICATION_XML_VALUE }, consumes = { MediaType.APPLICATION_XML_VALUE,
+					MediaType.APPLICATION_JSON_VALUE })
+	public OperationStatus passwordResetRequest(@RequestBody PasswordResetRequestModel passwordResetRequestModel) {
+		OperationStatus returnValue = new OperationStatus();
+		boolean operationResult = userService.requestPasswordReset(passwordResetRequestModel.getEmail());
+		
+		returnValue.setOperationName(OperationNames.REQUEST_PASSWORD_RESET.name());
+		returnValue.setOperationStatus(OperationStatuses.ERROR.name());
+		
+		if(operationResult) {
+			returnValue.setOperationStatus(OperationStatuses.SUCCESS.name());
+		}
+		return returnValue;
+	}
+	
+	@PostMapping(path = "/password-reset", produces = { MediaType.APPLICATION_JSON_VALUE,
+			MediaType.APPLICATION_XML_VALUE }, consumes = { MediaType.APPLICATION_XML_VALUE,
+					MediaType.APPLICATION_JSON_VALUE })
+	public OperationStatus passwordReset(@RequestBody PasswordResetModel passwordResetModel) {
+		OperationStatus returnValue = new OperationStatus();
+		boolean operationResult = userService.resetPassword(passwordResetModel.getToken(), passwordResetModel.getPassword());
+		
+		returnValue.setOperationName(OperationNames.PASSWORD_RESET.name());
+		returnValue.setOperationStatus(OperationStatuses.ERROR.name());
+		
+		if(operationResult) {
+			returnValue.setOperationStatus(OperationStatuses.SUCCESS.name());
+		}
 		return returnValue;
 	}
 }
