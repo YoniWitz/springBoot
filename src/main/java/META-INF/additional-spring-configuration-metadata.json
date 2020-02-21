@@ -1,0 +1,112 @@
+{"properties": [
+  {
+    "name": "userController.Swagger.GetUser.notes",
+    "type": "java.lang.String",
+    "description": "A description for 'userController.Swagger.GetUser.notes'"
+  },
+  {
+    "name": "userController.Swagger.GetUsers.notes",
+    "type": "java.lang.String",
+    "description": "A description for 'userController.Swagger.GetUsers.notes'"
+  },
+  {
+    "name": "userController.Swagger.GetUser.value",
+    "type": "java.lang.String",
+    "description": "A description for 'userController.Swagger.GetUser.value'"
+  },
+  {
+    "name": "userController.Swagger.GetUserAddresses.value",
+    "type": "java.lang.String",
+    "description": "A description for 'userController.Swagger.GetUserAddresses.value'"
+  },
+  {
+    "name": "userController.Swagger.GetUserAddress.value",
+    "type": "java.lang.String",
+    "description": "A description for 'userController.Swagger.GetUserAddress.value'"
+  },
+  {
+    "name": "userController.Swagger.GetUsers.value",
+    "type": "java.lang.String",
+    "description": "A description for 'userController.Swagger.GetUsers.value'"
+  },
+  {
+    "name": "userController.Swagger.CreateUser.value",
+    "type": "java.lang.String",
+    "description": "A description for 'userController.Swagger.CreateUser.value'"
+  },
+  {
+    "name": "userController.Swagger.UpdateUser.notes",
+    "type": "java.lang.String",
+    "description": "A description for 'userController.Swagger.UpdateUser.notes'"
+  },
+  {
+    "name": "userController.Swagger.GetUserAddresses.notes",
+    "type": "java.lang.String",
+    "description": "A description for 'userController.Swagger.GetUserAddresses.notes'"
+  },
+  {
+    "name": "userController.Swagger.GetUserAddress.notes",
+    "type": "java.lang.String",
+    "description": "A description for 'userController.Swagger.GetUserAddress.notes'"
+  },
+  {
+    "name": "userController.Swagger.UpdateUser.value",
+    "type": "java.lang.String",
+    "description": "A description for 'userController.Swagger.UpdateUser.value'"
+  },
+  {
+    "name": "userController.Swagger.UpdateUser.notes",
+    "type": "java.lang.String",
+    "description": "A description for 'userController.Swagger.UpdateUser.notes'"
+  },
+  {
+    "name": "userController.Swagger.UpdateUser.notes",
+    "type": "java.lang.String",
+    "description": "A description for 'userController.Swagger.UpdateUser.notes'"
+  },
+  {
+    "name": "userController.Swagger.DeleteUser.value",
+    "type": "java.lang.String",
+    "description": "A description for 'userController.Swagger.DeleteUser.value'"
+  },
+  {
+    "name": "loginController.Swagger.Login.notes",
+    "type": "java.lang.String",
+    "description": "A description for 'loginController.Swagger.Login.notes'"
+  },
+  {
+    "name": "userController.Swagger.DeleteUser.notes",
+    "type": "java.lang.String",
+    "description": "A description for 'userController.Swagger.DeleteUser.notes'"
+  },
+  {
+    "name": "tokenSecret",
+    "type": "java.lang.String",
+    "description": "A description for 'tokenSecret'"
+  },
+  {
+    "name": "userController.Swagger.GetUserAddress.notes",
+    "type": "java.lang.String",
+    "description": "A description for 'userController.Swagger.GetUserAddress.notes'"
+  },
+  {
+    "name": "userController.Swagger.GetUserAddress.notes",
+    "type": "java.lang.String",
+    "description": "A description for 'userController.Swagger.GetUserAddress.notes'"
+  },
+  {
+    "name": "userController.Swagger.GetUserAddress.notes",
+    "type": "java.lang.String",
+    "description": "A description for 'userController.Swagger.GetUserAddress.notes'"
+  },
+  {
+    "name": "loginController.Swagger.Login.value",
+    "type": "java.lang.String",
+    "description": "A description for 'loginController.Swagger.Login.value'"
+  },
+  {
+    "name": "userController.Swagger.DeleteUser.notes",
+    "type": "java.lang.String",
+    "description": "A description for 'userController.Swagger.DeleteUser.notes'"
+  }
+]}

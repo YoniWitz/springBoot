@@ -10,11 +10,11 @@
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 
-	<groupId>com.yonipony.app.ws</groupId>
-	<artifactId>yonipony</artifactId>
+	<groupId>com.yoniwitz.app.ws</groupId>
+	<artifactId>yoniwitz</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
-	<name>yonipony</name>
+	<name>yoniwitz</name>
 	<description>Demo project for Spring Boot</description>
 
 	<properties>
