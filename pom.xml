@@ -10,11 +10,11 @@
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 
-	<groupId>com.yoniwitz.app</groupId>
-	<artifactId>yoniwitz</artifactId>
+	<groupId>com.api.app</groupId>
+	<artifactId>api</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
-	<name>yoniwitz</name>
+	<name>api</name>
 
 	<properties>
 		<java.version>1.8</java.version>
