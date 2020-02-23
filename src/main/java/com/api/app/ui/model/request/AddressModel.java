@@ -1,6 +1,15 @@
 package com.api.app.ui.model.request;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
 public class AddressModel {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)	
+	Long id;
 	private String city;
 	private String country;
 	private String streetName;
