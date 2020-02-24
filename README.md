@@ -1,8 +1,8 @@
-# API-User
+# User-APIs
 
 The exposed APIs allow creating users. Once logged in, the user can read/update/delete the user's information. Written in Spring Boot Java, h2 database and Swagger for documentation.
 
-## You can see all the end points [here](https://yw-api-user-and-address.herokuapp.com/api/swagger-ui.html)
+## You can see all the end points [here](https://yw-user-apis.herokuapp.com/api/swagger-ui.html#/)
 
 <image src="assets/user_apis_snapshot.png">
 
