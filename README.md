@@ -1,6 +1,7 @@
 # User-APIs
 
-The exposed APIs allow creating users. Once logged in, the user can read/update/delete the user's information. Written in Spring Boot Java, h2 database and Swagger for documentation.
+The exposed APIs allow creating users. Once logged in, the user can read/update/delete the user's information. Written in Spring Boot Java, h2 database and Swagger for documentation.  
+A Rest Assured test case is included as well.
 
 ## You can see all the end points [here](https://yw-user-apis.herokuapp.com/api/swagger-ui.html#/)
 
@@ -17,6 +18,7 @@ Authorization Header (Bearer)
 Deployment to Heroku  
 h2 database 
 Swagger documentation  
+Testing  
   
 ##  Installation Instructions (Check out Swagger-UI for Endpoints documentation)
 

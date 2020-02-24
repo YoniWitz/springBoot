@@ -26,7 +26,7 @@ class UsersWebServiceEndpointTests {
 
 	private static final String APPLICATION_JSON = "application/json";
 	private static final String CONTEXT_PATH = "/api";
-	private static final String EMAIL_ADDRESS = "jonhirsh39@gmail.com";
+	private static final String EMAIL_ADDRESS = "jonhirsh392@gmail.com";
 	// static final String HEADER_AUTHORIZATION_VALUE = "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwb3BvMTIiLCJleHAiOjE1NDk3Mzc3Nzh9._rFDi81AYMtBIkS-kGu5vkBxr3uZcvxQFcSKBRyOwxvthZpRDjxppp_HCq0gZqUNlUPlwy_zBixaK5MQVyv65w";
 	private static String authorizationHeader;
 	private static String userId;
