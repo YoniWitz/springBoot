@@ -1,0 +1,4 @@
+com\api\app\ui\controller\UserControllerTest.class
+com\api\app\shared\UtilsTest.class
+com\api\app\service\imp\UserServiceImplTest.class
+com\api\app\ui\repository\UserRepositoryTest.class
