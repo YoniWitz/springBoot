@@ -1,6 +1,8 @@
 package com.api.app;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 
 import org.springframework.context.annotation.Bean;
@@ -19,15 +21,15 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableSwagger2
 public class SwaggerConfig {
 
-	Contact contact = new Contact("api", "http://www.api.com", "jonhirsh39@gmail.com");
+	Contact contact = new Contact("Jonathan Hirshowitz", "https://github.com/YoniWitz/", "jonhirsh39@gmail.com");
 	List<VendorExtension> vendorExtension = new ArrayList<>();
-	ApiInfo apiInfo = new ApiInfo("My first Spring Boot", "This page documents RESTful Web Service endpoints", "1.0",
-			"localhost:8080", contact, "Apache 2.0", "http://www.apache.org/license/LICENSE-2.0", vendorExtension);
+	ApiInfo apiInfo = new ApiInfo("User Api using Spring Boot", "This page documents RESTful Web Service endpoints", "1.0",
+			"", contact, "Apache 2.0", "http://www.apache.org/license/LICENSE-2.0", vendorExtension);
 
 	@Bean
 	public Docket apiDocket() {
 		Docket docket = new Docket(DocumentationType.SWAGGER_2)
-				// .protocols(new HashSet<>(Arrays.asList("HTTP", "HTTPS")))
+				.protocols(new HashSet<>(Arrays.asList("HTTP", "HTTPS")))
 				.apiInfo(apiInfo).select().apis(RequestHandlerSelectors.basePackage("com.api.app"))
 				.paths(PathSelectors.any()).build();
 
