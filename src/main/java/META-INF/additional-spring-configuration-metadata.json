@@ -55,16 +55,6 @@
     "description": "A description for 'userController.Swagger.UpdateUser.value'"
   },
   {
-    "name": "userController.Swagger.UpdateUser.notes",
-    "type": "java.lang.String",
-    "description": "A description for 'userController.Swagger.UpdateUser.notes'"
-  },
-  {
-    "name": "userController.Swagger.UpdateUser.notes",
-    "type": "java.lang.String",
-    "description": "A description for 'userController.Swagger.UpdateUser.notes'"
-  },
-  {
     "name": "userController.Swagger.DeleteUser.value",
     "type": "java.lang.String",
     "description": "A description for 'userController.Swagger.DeleteUser.value'"
@@ -85,29 +75,9 @@
     "description": "A description for 'tokenSecret'"
   },
   {
-    "name": "userController.Swagger.GetUserAddress.notes",
-    "type": "java.lang.String",
-    "description": "A description for 'userController.Swagger.GetUserAddress.notes'"
-  },
-  {
-    "name": "userController.Swagger.GetUserAddress.notes",
-    "type": "java.lang.String",
-    "description": "A description for 'userController.Swagger.GetUserAddress.notes'"
-  },
-  {
-    "name": "userController.Swagger.GetUserAddress.notes",
-    "type": "java.lang.String",
-    "description": "A description for 'userController.Swagger.GetUserAddress.notes'"
-  },
-  {
     "name": "loginController.Swagger.Login.value",
     "type": "java.lang.String",
     "description": "A description for 'loginController.Swagger.Login.value'"
-  },
-  {
-    "name": "userController.Swagger.DeleteUser.notes",
-    "type": "java.lang.String",
-    "description": "A description for 'userController.Swagger.DeleteUser.notes'"
   },
   {
     "name": "datasource.flyway.driver-class-name",
@@ -128,15 +98,5 @@
     "name": "datasource.flyway.username",
     "type": "java.lang.String",
     "description": "A description for 'datasource.flyway.username'"
-  },
-  {
-    "name": "loginController.Swagger.Login.notes",
-    "type": "java.lang.String",
-    "description": "A description for 'loginController.Swagger.Login.notes'"
-  },
-  {
-    "name": "loginController.Swagger.Login.notes",
-    "type": "java.lang.String",
-    "description": "A description for 'loginController.Swagger.Login.notes'"
   }
 ]}
