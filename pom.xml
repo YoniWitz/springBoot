@@ -11,10 +11,10 @@
 	</parent>
 
 	<groupId>com.api.app</groupId>
-	<artifactId>api</artifactId>
+	<artifactId>user-apis</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
-	<name>api</name>
+	<name>user-apis</name>
 
 	<properties>
 		<java.version>1.8</java.version>
