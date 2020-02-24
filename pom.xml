@@ -125,7 +125,7 @@
 				<groupId>org.flywaydb</groupId>
 				<artifactId>flyway-maven-plugin</artifactId>
 				<configuration>
-					<url>jdbc:h2:file:~/api-user-and-address</url>
+					<url>jdbc:h2:file:~/user-apis</url>
 					<user>sa</user>
 				</configuration>
 			</plugin>
