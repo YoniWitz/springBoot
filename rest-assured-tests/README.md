@@ -12,7 +12,7 @@ I wrote these tests in a separate project so they could be used live and indepen
 1. Download this Repository and User-APIs Repository  
 2. In command line, cd to User-APIs root directory and type: mvn install -DskipTests  
 3. next: mvn spring-boot:run  
-4. In IDE: right click project and run as 'Junit Test'
+4. In IDE: right click 'test' folder in this project and run as 'Junit Test'
 
 ## Author
 
