@@ -23,7 +23,7 @@ Testing
 ##  Installation Instructions (Check out Swagger-UI for Endpoints documentation)
 
 1. Download Repository  
-2. In command line, cd to root directory and type: mvn install -DskipTests  
+2. In command line, cd to 'apis' directory and type: mvn install -DskipTests  
 3. next: mvn spring-boot:run  
 4. Using Postman or any other API Developemnt Platform: create a user  
 5. Login using user credentials  
